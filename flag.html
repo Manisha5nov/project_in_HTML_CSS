@@ -1,0 +1,848 @@
+# Independence Day Website — `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Independence Day 🇮🇳</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fff;
+            color: #222;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span:first-child {
+            color: #ff9933;
+        }
+
+        .logo span:last-child {
+            color: #138808;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #222;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff6600;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 100vh;
+            padding-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(to bottom,
+                    #ff9933 0%,
+                    #ff9933 33%,
+                    #ffffff 33%,
+                    #ffffff 66%,
+                    #138808 66%,
+                    #138808 100%);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            padding: 30px;
+        }
+
+        .flag {
+            width: 260px;
+            height: 170px;
+            margin: 0 auto 25px;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            animation: wave 2.5s infinite ease-in-out;
+            transform-origin: left center;
+        }
+
+        .saffron,
+        .white,
+        .green {
+            width: 100%;
+            height: 33.33%;
+        }
+
+        .saffron {
+            background: #ff9933;
+        }
+
+        .white {
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .green {
+            background: #138808;
+        }
+
+        .chakra {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #000080;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .chakra::before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: #000080;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .chakra::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: #000080;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 80px);
+            color: #111;
+            text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .hero h1 span {
+            color: #ff6600;
+        }
+
+        .hero h2 {
+            margin-top: 10px;
+            color: #138808;
+            font-size: clamp(22px, 4vw, 38px);
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 20px auto;
+            font-size: 19px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            margin-top: 15px;
+            background: #ff6600;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            background: #138808;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: #222;
+        }
+
+        .section-title h2 span {
+            color: #ff6600;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            background: #fafafa;
+        }
+
+        .about-content {
+            max-width: 950px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        /* ================= CARDS ================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: 0.4s;
+            border-top: 5px solid #ff9933;
+        }
+
+        .card:nth-child(2) {
+            border-top-color: #138808;
+        }
+
+        .card:nth-child(3) {
+            border-top-color: #000080;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ================= QUOTE ================= */
+
+        .quote {
+            text-align: center;
+            background: linear-gradient(135deg,
+                    #ff9933,
+                    #ffffff,
+                    #138808);
+        }
+
+        .quote-box {
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .quote-box h2 {
+            font-size: 35px;
+            color: #000080;
+            margin-bottom: 15px;
+        }
+
+        .quote-box p {
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        /* ================= COUNTDOWN ================= */
+
+        .countdown {
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        .countdown h2 {
+            font-size: 35px;
+            margin-bottom: 30px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            width: 120px;
+            padding: 20px 10px;
+            background: #222;
+            border-radius: 15px;
+            border-bottom: 4px solid #ff9933;
+        }
+
+        .time-box:nth-child(2) {
+            border-bottom-color: white;
+        }
+
+        .time-box:nth-child(3) {
+            border-bottom-color: #138808;
+        }
+
+        .time-box:nth-child(4) {
+            border-bottom-color: #000080;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .time-box small {
+            color: #ccc;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            background: #111;
+            color: white;
+        }
+
+        footer h3 {
+            color: #ff9933;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            color: #ccc;
+        }
+
+        /* ================= FIREWORKS ================= */
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            border-radius: 50%;
+            animation: explode 2s infinite;
+            opacity: 0;
+        }
+
+        .firework:nth-child(1) {
+            top: 20%;
+            left: 15%;
+        }
+
+        .firework:nth-child(2) {
+            top: 30%;
+            right: 15%;
+            animation-delay: .7s;
+        }
+
+        .firework:nth-child(3) {
+            bottom: 20%;
+            left: 25%;
+            animation-delay: 1.2s;
+        }
+
+        .firework:nth-child(4) {
+            bottom: 30%;
+            right: 25%;
+            animation-delay: 1.7s;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: perspective(500px) rotateY(0deg);
+            }
+
+            50% {
+                transform: perspective(500px) rotateY(-8deg) skewY(1deg);
+            }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+                box-shadow:
+                    0 0 0 0 white;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(15);
+                opacity: 0;
+                box-shadow:
+                    0 -40px 0 white,
+                    0 40px 0 white,
+                    40px 0 0 white,
+                    -40px 0 0 white,
+                    30px 30px 0 white,
+                    -30px -30px 0 white,
+                    30px -30px 0 white,
+                    -30px 30px 0 white;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav ul li a {
+                font-size: 13px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 110px;
+            }
+
+            .flag {
+                width: 220px;
+                height: 145px;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .logo {
+                margin: auto;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .timer {
+                gap: 10px;
+            }
+
+            .time-box {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+        <div class="logo">
+            🇮🇳 <span>INDIA</span>
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#values">Values</a></li>
+            <li><a href="#message">Message</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+
+        <div class="hero-content">
+
+            <div class="flag">
+                <div class="saffron"></div>
+
+                <div class="white">
+                    <div class="chakra"></div>
+                </div>
+
+                <div class="green"></div>
+            </div>
+
+            <h1>
+                Happy <span>Independence</span> Day
+            </h1>
+
+            <h2>15 August 🇮🇳</h2>
+
+            <p>
+                Let us celebrate the spirit of freedom, unity,
+                peace and progress. Together, let us build a
+                stronger and brighter India.
+            </p>
+
+            <a href="#about" class="btn">
+                🇮🇳 Explore
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+        <div class="section-title">
+            <h2>About <span>Independence Day</span></h2>
+            <p>Celebrating the spirit of a free India</p>
+        </div>
+
+        <div class="about-content">
+
+            <p>
+                India's Independence Day is celebrated every year
+                on <strong>15 August</strong>. On this historic day
+                in 1947, India became independent from British rule.
+            </p>
+
+            <br>
+
+            <p>
+                Independence Day reminds us of the sacrifices made
+                by our freedom fighters and inspires every citizen
+                to contribute towards the development and unity of
+                our nation.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= VALUES ================= -->
+
+    <section id="values">
+
+        <div class="section-title">
+            <h2>Our <span>National Values</span></h2>
+            <p>The values that make India strong</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🇮🇳</div>
+                <h3>Unity</h3>
+                <p>
+                    Unity in diversity is one of India's greatest
+                    strengths. Together we can achieve more.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🕊️</div>
+                <h3>Peace</h3>
+                <p>
+                    Let us promote peace, harmony and respect
+                    among every citizen of our country.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h3>Progress</h3>
+                <p>
+                    Education, innovation and hard work can help
+                    India move towards a brighter future.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUOTE ================= -->
+
+    <section class="quote" id="message">
+
+        <div class="quote-box">
+
+            <h2>🇮🇳 A Message for India 🇮🇳</h2>
+
+            <p>
+                "Freedom is not just a right; it is a responsibility.
+                Let us respect our nation, help one another and work
+                together to make India stronger, cleaner and better."
+            </p>
+
+            <br>
+
+            <strong>
+                Jai Hind!
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= COUNTDOWN ================= -->
+
+    <section class="countdown">
+
+        <h2>Independence Day Celebration </h2>
+
+        <div class="timer">
+
+            <div class="time-box">
+                <span id="days">00</span>
+                <small>Days</small>
+            </div>
+
+            <div class="time-box">
+                <span id="hours">00</span>
+                <small>Hours</small>
+            </div>
+
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <small>Minutes</small>
+            </div>
+
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <small>Seconds</small>
+            </div>
+
+        </div>
+
+        <br>
+
+        <button class="btn" onclick="celebrate()">
+            🎉 Celebrate
+        </button>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>Vande Mataram </h3>
+
+        <p>
+            Happy Independence Day to all Indians!
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 Independence Day | Designed with ❤️ for India
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* Countdown */
+
+        function updateCountdown() {
+
+            const now = new Date();
+
+            let year = now.getFullYear();
+
+            let independenceDay =
+                new Date(year, 7, 15, 0, 0, 0);
+
+            if (now > independenceDay) {
+                independenceDay =
+                    new Date(year + 1, 7, 15, 0, 0, 0);
+            }
+
+            const difference =
+                independenceDay - now;
+
+            const days =
+                Math.floor(difference / (1000 * 60 * 60 * 24));
+
+            const hours =
+                Math.floor(
+                    (difference / (1000 * 60 * 60)) % 24
+                );
+
+            const minutes =
+                Math.floor(
+                    (difference / (1000 * 60)) % 60
+                );
+
+            const seconds =
+                Math.floor(
+                    (difference / 1000) % 60
+                );
+
+            document.getElementById("days").innerText =
+                String(days).padStart(2, "0");
+
+            document.getElementById("hours").innerText =
+                String(hours).padStart(2, "0");
+
+            document.getElementById("minutes").innerText =
+                String(minutes).padStart(2, "0");
+
+            document.getElementById("seconds").innerText =
+                String(seconds).padStart(2, "0");
+        }
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000);
+
+
+        /* Celebration */
+
+        function celebrate() {
+
+            alert(
+                "🇮🇳 HAPPY INDEPENDENCE DAY 🇮🇳\n\n" +
+                "Vande Mataram!\n" +
+                "Jai Hind!"
+            );
+
+            for (let i = 0; i < 20; i++) {
+
+                const firework =
+                    document.createElement("div");
+
+                firework.className = "firework";
+
+                firework.style.position = "fixed";
+                firework.style.left =
+                    Math.random() * 100 + "%";
+                firework.style.top =
+                    Math.random() * 100 + "%";
+
+                firework.style.zIndex = "9999";
+
+                document.body.appendChild(firework);
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
